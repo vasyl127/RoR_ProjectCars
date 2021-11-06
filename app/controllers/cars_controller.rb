@@ -4,6 +4,10 @@ class CarsController < ApplicationController
     @cars = Car.all
   end
 
+  def show
+    @car = Car.find_by id: params[:id]
+  end
+
   def destroy
     @car = Car.find_by id: params[:id]
     @car.destroy
