@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyText
+  rpm: 1
+  max_rpm: 1
+  gear: 1
+  max_gear: 1
+  speed: 1
+  max_speed: 1
+  torque: 1
+  odo: 1
+
+two:
+  name: MyString
+  description: MyText
+  rpm: 1
+  max_rpm: 1
+  gear: 1
+  max_gear: 1
+  speed: 1
+  max_speed: 1
+  torque: 1
+  odo: 1

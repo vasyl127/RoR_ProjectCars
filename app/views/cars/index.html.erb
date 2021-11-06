@@ -1,0 +1,15 @@
+<h1>Project Cars</h1>
+<h3>Cars:</h3>
+
+<% @cars.each do |car| %>
+
+
+<div>
+<%= car.name %> <%= car.max_rpm %> <%= car.torque %> <%= car.max_gear %> <%= car.max_speed %>
+<br>
+<%= link_to 'Edit', edit_car_path(car) %> |
+<%= link_to 'Delete', car_path(car), data: {method: :delete, confirm: "Are you sure?"} %>
+</div>
+
+
+<% end %>

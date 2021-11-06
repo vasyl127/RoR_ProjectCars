@@ -1,0 +1,20 @@
+<%= form_with model: @car do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name, required: true, minlength: 2, placeholder: "Name car" %>
+  <br>
+  <%= f.label :max_rpm %>
+  <%= f.text_field :max_rpm, required: true, minlength: 2, placeholder: "MAX RPM" %>
+  <br>
+  <%= f.label :torque %>
+  <%= f.text_field :torque, required: true, minlength: 2, placeholder: "Torque" %>
+  <br>
+  <%= f.label :max_gear %>
+  <%= f.text_field :max_gear, required: true, minlength: 1, placeholder: "MAX GEAR" %>
+  <br>
+  <%= f.label :max_speed %>
+  <%= f.text_field :max_speed, required: true, minlength: 2, placeholder: "MAX SPEED" %>
+  <br>
+
+
+  <%= f.submit "Submit!"%>
+<% end %>
