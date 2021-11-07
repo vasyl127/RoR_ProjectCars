@@ -43,6 +43,6 @@ class CarsController < ApplicationController
   private
 
   def car_params
-    params.require(:car).permit(:name, :max_rpm, :torque, :max_gear, :max_speed)
+    params.require(:car).permit(:name, :max_rpm, :torque, :max_gear, :max_speed, :description)
   end
 end

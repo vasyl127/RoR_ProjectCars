@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8">
     <title>ProjectCars</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
@@ -10,7 +11,28 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
+  <div class="container">
+  <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+      <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+      <span class="fs-4">Project Cars</span>
+    </a>
+
+    <ul class="nav nav-pills">
+      <li class="nav-item"><%= link_to 'Home', root_path, class: "nav-link active" %></li>
+      <li class="nav-item"><%= link_to 'Cars', cars_path, class: "nav-link" %></li>
+      <li class="nav-item"><%= link_to 'Drag', drag_path, class: "nav-link" %></li>
+      <li class="nav-item"><%= link_to 'FAQs', faqs_path, class: "nav-link" %></li>
+      <li class="nav-item"><%= link_to 'About', about_path, class: "nav-link" %></li>
+    </ul>
+  </header>
+</div>
+
+
+
   <body>
+    <div class="container">
     <%= yield %>
+    </div>
   </body>
 </html>

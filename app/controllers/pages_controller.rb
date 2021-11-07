@@ -4,4 +4,11 @@ def index
 
 end
 
+def about
+
+end
+
+def faqs
+
+end
 end
