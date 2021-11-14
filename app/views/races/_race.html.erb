@@ -1,0 +1,12 @@
+<div class="card mb-2 mx-2" style="max-width: 12rem; max-height: 12rem;">
+  <div class="card-body">
+    <h5 class="card-title"><%= race.name %></h5>
+    <p class="card-text text-truncate">
+      <%= race.description %>
+    </p>
+  </div>
+  <div class="card-footer">
+    <%= link_to 'Show', race_path(race), class: 'btn btn-primary '%>
+    <%= link_to 'Delete', race_path(race), data: {method: :delete, confirm: "Are you sure?"}, class: 'btn btn-danger ' %>
+  </div>
+</div>

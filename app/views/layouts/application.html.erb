@@ -21,7 +21,7 @@
     <ul class="nav nav-pills">
       <li class="nav-item"><%= link_to 'Home', root_path, class: "nav-link active" %></li>
       <li class="nav-item"><%= link_to 'Cars', cars_path, class: "nav-link" %></li>
-      <li class="nav-item"><%= link_to 'Drag', drag_path, class: "nav-link" %></li>
+      <li class="nav-item"><%= link_to 'Race', races_path, class: "nav-link" %></li>
       <li class="nav-item"><%= link_to 'FAQs', faqs_path, class: "nav-link" %></li>
       <li class="nav-item"><%= link_to 'About', about_path, class: "nav-link" %></li>
     </ul>
@@ -32,6 +32,11 @@
 
   <body>
     <div class="container">
+
+      <% flash.each do |k,v| %>
+        <%= tag.div v, class: "alert alert-#{k}", role: 'alert' %>
+      <% end %>
+
     <%= yield %>
     </div>
   </body>

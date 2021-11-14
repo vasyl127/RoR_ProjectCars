@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
 
-  resources :cars, only: %i[index new edit create update destroy show]
+  resources :races
+  resources :cars
 
-  get 'drag', to: 'drag#index'
+  get '/races/:id/add_car', to: 'races#add_car'
   get 'about', to: 'pages#about'
   get 'faqs', to: 'pages#faqs'
-
+  get '/races/:race_id/add_race_car/:car_id', to: 'races#add_race_car'
 
   root 'pages#index'
 

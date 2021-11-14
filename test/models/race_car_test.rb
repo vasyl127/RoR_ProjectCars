@@ -1,6 +1,6 @@
 require "test_helper"
 
-class DragControllerTest < ActionDispatch::IntegrationTest
+class RaceCarTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

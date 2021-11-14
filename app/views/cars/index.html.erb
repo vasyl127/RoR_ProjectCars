@@ -1,24 +1,7 @@
 <div class="card-body">
   <%= link_to '+ Add car', new_car_path, class: 'btn btn-success '%>
 </div>
-
 <h3 class= 'mb-4'>Cars:</h3>
-
-    <% @cars.each do |car| %>
-<article class="card">
-  <div class="card-body">
-    <h4>
-    <%= car.name %>
-    </h4>
-  <selection class="card-text">
-    <h6>
-    <%= car.description %>
-    <h6>
-  </selection>
-<%= link_to 'Show', car_path(car), class: 'btn btn-primary '%>
-<%= link_to 'Edit', edit_car_path(car), class: 'btn btn-primary ' %>
-<%= link_to 'Delete', car_path(car), data: {method: :delete, confirm: "Are you sure?"}, class: 'btn btn-danger ' %>
+<div class="d-flex align-content-center flex-wrap ">
+  <%= render @cars %>
 </div>
-</article>
-<br>
-    <% end %>

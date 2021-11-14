@@ -1,0 +1,18 @@
+<h3 class= 'mb-4'>Show race:</h3>
+
+<ul class="list-group">
+  <li class="list-group-item active"><%= @race.name %></li>
+  <li class="list-group-item">Description   --> <%= @race.description %> </li>
+
+
+  <li class="list-group-item">Cars    -->
+      <% @race_car.each do |car| %>
+      <%= @cars[car.car_id-1].name%>
+      <% end %>
+  </li>
+
+</ul>
+
+<%= link_to 'Add car', "/races/#{@race.id}/add_car", class: 'btn btn-success ' %>
+<%= link_to 'Edit', edit_race_path(@race), class: 'btn btn-primary ' %>
+<%= link_to 'Delete', race_path(@race), data: {method: :delete, confirm: "Are you sure?"}, class: 'btn btn-danger ' %>

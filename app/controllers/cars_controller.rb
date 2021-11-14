@@ -11,6 +11,7 @@ class CarsController < ApplicationController
   def destroy
     @car = Car.find_by id: params[:id]
     @car.destroy
+    flash[:success] = 'Car deleted!'
     redirect_to cars_path
   end
 
@@ -26,6 +27,7 @@ class CarsController < ApplicationController
     @car = Car.find_by id: params[:id]
     if @car.update car_params
       redirect_to cars_path
+      flash[:success] = 'Car updated!'
     else
       render :new
     end
@@ -34,6 +36,7 @@ class CarsController < ApplicationController
   def create
     @car = Car.new car_params
     if @car.save
+      flash[:success] = 'Car created!'
       redirect_to cars_path
     else
       render :new

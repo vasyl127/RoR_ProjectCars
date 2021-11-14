@@ -1,0 +1,9 @@
+<div class="card-body">
+  <%= link_to '+ Add race', new_race_path, class: 'btn btn-success '%>
+</div>
+
+<h3 class= 'mb-4'>Races:</h3>
+
+<div class="d-flex align-content-center flex-wrap ">
+  <%= render @races %>
+</div>
