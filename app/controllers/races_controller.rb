@@ -1,6 +1,6 @@
 class RacesController < ApplicationController
 before_action :set_races, :set_cars
-before_action :set_race, exception: %i[new create destroy]
+before_action :set_race, exception: %i[new create destroy add_race_car delete_race_car]
 
   def index
   end
@@ -23,11 +23,23 @@ before_action :set_race, exception: %i[new create destroy]
     end
   end
 
+  def delete_race_car
+    @race = Race.find_by id: params[:race_id]
+    @car = Car.find_by id: params[:car_id]
+    @race.cars.delete(@car)
+    flash[:success] = 'Сar was removed from the race'
+    redirect_to "/races/#{@race.id}"
+  end
+
   def new
     @race = Race.new
   end
 
   def edit
+  end
+
+  def start_race
+    
   end
 
   def create

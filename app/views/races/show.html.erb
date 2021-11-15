@@ -1,15 +1,33 @@
 <h3 class= 'mb-4'>Show race:</h3>
 
-<ul class="list-group">
+<ul class="list-group mb-2" style="max-width: 35rem;">
   <li class="list-group-item active"><%= @race.name %></li>
-  <li class="list-group-item">Description   --> <%= @race.description %> </li>
-  <li class="list-group-item">Cars    -->
-      <% @race.cars.each do |car| %>
-      <%= car.name%>
-      <% end %>
-  </li>
+  <li class="list-group-item "><%= @race.description %> </li>
 </ul>
 
 <%= link_to 'Add car', "/races/#{@race.id}/select_car", class: 'btn btn-success ' %>
 <%= link_to 'Edit', edit_race_path(@race), class: 'btn btn-primary ' %>
 <%= link_to 'Delete', race_path(@race), data: {method: :delete, confirm: "Are you sure?"}, class: 'btn btn-danger ' %>
+<% if @race.cars.size >= 2 %>
+<%= link_to 'Start race', "/races/#{@race.id}/start_race", class: 'btn btn-success', style: 'width: 21rem' %>
+<%end%>
+
+
+  <% if !@race.cars.empty? %>
+  <div class="my-3 fs-4">Cars in race:</div>
+  <div class="d-flex align-content-center flex-wrap mt-4 ">
+  <% @race.cars.each do |car| %>
+  <div class="card mb-2 mx-2" style="max-width: 14rem; max-height: 12rem;">
+    <div class="card-body">
+      <h5 class="card-title"><%= car.name %></h5>
+      <p class="card-text text-truncate">
+        <%= car.description %>
+      </p>
+    </div>
+    <div class="card-footer">
+      <%= link_to 'View', car_path(car), class: 'btn btn-secondary ' %>
+      <%= link_to 'Delete', "/races/#{@race.id}/delete_race_car/#{car.id}", class: 'btn btn-danger ' %>
+    </div>
+  </div>
+  <% end %>
+  <% end %>
