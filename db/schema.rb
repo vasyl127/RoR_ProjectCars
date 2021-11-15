@@ -15,13 +15,10 @@ ActiveRecord::Schema.define(version: 2021_11_14_111427) do
   create_table "cars", force: :cascade do |t|
     t.string "name"
     t.text "description"
-    t.integer "rpm"
     t.integer "max_rpm"
-    t.integer "gear"
-    t.integer "max_gear"
-    t.integer "speed"
-    t.integer "max_speed"
     t.integer "torque"
+    t.integer "max_gear"
+    t.integer "max_speed"
     t.integer "odo"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
