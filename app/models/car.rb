@@ -6,4 +6,7 @@ class Car < ApplicationRecord
   validates :torque, presence: true, length: {minimum: 3}
   validates :description, presence: true, length: {minimum: 5}
 
+  has_many :race_cars, dependent: :destroy
+  has_many :races, through: :race_cars
+
 end

@@ -1,5 +1,4 @@
 class RaceCar < ApplicationRecord
-  validates :car_id, presence: true
-  validates :race_id, presence: true
-
+  belongs_to :race
+  belongs_to :car
 end

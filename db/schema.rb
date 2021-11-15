@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_11_180240) do
+ActiveRecord::Schema.define(version: 2021_11_14_111427) do
 
   create_table "cars", force: :cascade do |t|
     t.string "name"
@@ -28,18 +28,22 @@ ActiveRecord::Schema.define(version: 2021_11_11_180240) do
   end
 
   create_table "race_cars", force: :cascade do |t|
-    t.integer "race_id"
-    t.integer "car_id"
+    t.integer "race_id", null: false
+    t.integer "car_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["car_id"], name: "index_race_cars_on_car_id"
+    t.index ["race_id", "car_id"], name: "index_race_cars_on_race_id_and_car_id", unique: true
+    t.index ["race_id"], name: "index_race_cars_on_race_id"
   end
 
   create_table "races", force: :cascade do |t|
     t.string "name"
     t.text "description"
-    t.integer "car_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "race_cars", "cars"
+  add_foreign_key "race_cars", "races"
 end

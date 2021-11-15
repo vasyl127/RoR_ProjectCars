@@ -7,21 +7,22 @@ before_action :set_race, exception: %i[new create destroy]
 
   def show
     @cars = Car.all
-    @race_car = RaceCar.where(race_id: @race.id)
-
+    # @race_car = RaceCar.where(race_id: @race.id)
+    @race_car = @race.cars
   end
-  def add_car
+
+  def select_car
+    # @race added
     @race_car = RaceCar.where(race_id: @race.id)
     @cars = Car.all
-    # @cars = Car.where.not(id: @race_car.car_id)
 
   end
 
   def add_race_car
     @race = Race.find_by id: params[:race_id]
     @car = Car.find_by id: params[:car_id]
-    @race_car = RaceCar.new car_id: @car.id, race_id: @race.id
-    if @race_car.save
+    @race.cars += [@car]
+    if @race.save
       redirect_to "/races/#{@race.id}"
     else
       render :new
