@@ -1,21 +1,15 @@
 class RacesController < ApplicationController
-before_action :set_races
+before_action :set_races, :set_cars
 before_action :set_race, exception: %i[new create destroy]
 
   def index
   end
 
   def show
-    @cars = Car.all
-    # @race_car = RaceCar.where(race_id: @race.id)
-    @race_car = @race.cars
   end
 
   def select_car
-    # @race added
-    @race_car = RaceCar.where(race_id: @race.id)
-    @cars = Car.all
-
+    @race_car = @cars - @race.cars
   end
 
   def add_race_car
@@ -65,6 +59,10 @@ before_action :set_race, exception: %i[new create destroy]
 
   def race_params
     params.require(:race).permit(:name,:description)
+  end
+
+  def set_cars
+    @cars = Car.all
   end
 
   def set_races

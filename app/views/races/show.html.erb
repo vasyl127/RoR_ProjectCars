@@ -4,7 +4,7 @@
   <li class="list-group-item active"><%= @race.name %></li>
   <li class="list-group-item">Description   --> <%= @race.description %> </li>
   <li class="list-group-item">Cars    -->
-      <% @race_car.each do |car| %>
+      <% @race.cars.each do |car| %>
       <%= car.name%>
       <% end %>
   </li>
