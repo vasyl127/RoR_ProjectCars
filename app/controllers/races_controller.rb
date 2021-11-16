@@ -1,3 +1,8 @@
+require_relative "../race/race_logic"
+require_relative "../race/car/car_controller"
+require_relative "../race/car/model/car_mdl"
+
+
 class RacesController < ApplicationController
 before_action :set_races, :set_cars
 before_action :set_race, exception: %i[new create destroy add_race_car delete_race_car]
@@ -26,8 +31,8 @@ before_action :set_race, exception: %i[new create destroy add_race_car delete_ra
   def delete_race_car
     @race = Race.find_by id: params[:race_id]
     @car = Car.find_by id: params[:car_id]
+    flash[:success] = "#{@car.name} was removed from the race"
     @race.cars.delete(@car)
-    flash[:success] = 'Сar was removed from the race'
     redirect_to "/races/#{@race.id}"
   end
 
@@ -39,7 +44,11 @@ before_action :set_race, exception: %i[new create destroy add_race_car delete_ra
   end
 
   def start_race
-    
+    #@race , @races, @cars
+    @race_logic = RaceLogic.new
+    @race.cars.each do |car|
+      @race_logic.add_car_to_race(CarController.new(CarMdl.new(name: car.name, max_speed: car.max_speed, max_rpm: car.max_rpm, torque: car.torque, max_gear: car.max_gear)))
+    end
   end
 
   def create
