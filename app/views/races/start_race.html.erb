@@ -1,1 +1,8 @@
 <h4>Start_race</h4>
+<% @race_logic.start_race  %>
+<% cars_win = @race_logic.check_win  %>
+<% cars_win.each do |car| %>
+<%= car.name %>
+<%= car.odo %> metrs
+<br>
+<% end %>
