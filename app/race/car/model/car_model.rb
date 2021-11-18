@@ -2,7 +2,7 @@ require_relative 'engine'
 require_relative 'gearbox'
 
 
-class CarMdl
+class CarModel
   attr_reader :speed, :odo, :max_speed, :engine, :gearbox, :name
 
   def initialize(config)

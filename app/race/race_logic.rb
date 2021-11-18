@@ -1,4 +1,4 @@
-require_relative "car/model/car"
+require_relative "car/model/car_model"
 require_relative "car/car_controller"
 
 
