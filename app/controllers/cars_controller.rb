@@ -1,16 +1,19 @@
 class CarsController < ApplicationController
-
+  before_action :filter_init, :set_cars, :set_car
+  
   def index
-    @cars = Car.all
   end
 
   def show
-    @car = Car.find_by id: params[:id]
   end
 
   def destroy
-    @car = Car.find_by id: params[:id]
-    @car.destroy
+    if @car.deleted == 0
+      @car.deleted = 1
+      @car.save
+    else
+      @car.destroy
+    end
     flash[:success] = 'Car deleted!'
     redirect_to cars_path
   end
@@ -20,11 +23,9 @@ class CarsController < ApplicationController
   end
 
   def edit
-    @car = Car.find_by id: params[:id]
   end
 
   def update
-    @car = Car.find_by id: params[:id]
     if @car.update car_params
       redirect_to cars_path
       flash[:success] = 'Car updated!'
@@ -48,4 +49,18 @@ class CarsController < ApplicationController
   def car_params
     params.require(:car).permit(:name, :max_rpm, :torque, :max_gear, :max_speed, :description)
   end
+
+  def filter_init
+    @filter = Filter.new
+  end
+
+  def set_cars
+    @cars = @filter.cars_all
+  end
+
+  def set_car
+    @car = @filter.car_by_id(params[:id]||params[:car_id])
+  end
+
+
 end
