@@ -40,20 +40,7 @@ class CarService
   def g_down
     gb_service.g_down(gearbox, engine)
   end
-
-  def car_state
-    puts " Cars params:
-RPM       --> #{engine.rpm}
-MAX RPM   --> #{engine.max_rpm}
-Torque    --> #{engine.torque}
-Gear      --> #{gearbox.gear}
-Max Gear  --> #{gearbox.max_gear}
-Speed     --> #{car.speed}
-Max Speed --> #{car.max_speed}
-Odometr   --> #{car.odo}"
-  end
-
-
+  
   def shift_gear
     g_up if engine.rpm >= engine.torque
   end

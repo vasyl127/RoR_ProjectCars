@@ -1,6 +1,4 @@
-require_relative "../race/race_logic"
-require_relative "../race/car/car_controller"
-require_relative "../race/car/model/car_model"
+require_relative "services/race/race_logic"
 
 
 class RacesController < ApplicationController
@@ -46,9 +44,7 @@ before_action :set_race, exception: %i[new create destroy add_race_car delete_ra
   def start_race
     #@race , @races, @cars
     @race_logic = RaceLogic.new
-    @race.cars.each do |car|
-      @race_logic.add_car_to_race(CarController.new(CarModel.new(name: car.name, max_speed: car.max_speed, max_rpm: car.max_rpm, torque: car.torque, max_gear: car.max_gear)))
-    end
+    @race_logic.add_cars(@race.cars)
   end
 
   def create

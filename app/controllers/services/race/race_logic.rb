@@ -10,19 +10,19 @@ class RaceLogic
     @time = 60
   end
 
-  def add_car_to_race (car)
-    @cars << car
+  def add_cars(cars)
+    cars.each do |car|
+      add_car(car)
+    end
+  end
+
+  def add_car(car)
+    @cars << CarController.new(CarModel.new(car))
   end
 
   def cars_preparation
     @cars.each do |car|
       car.start
-    end
-  end
-
-  def cars_state
-    @cars.each do |car|
-      car.car_state
     end
   end
 
@@ -36,30 +36,27 @@ class RaceLogic
         car.shift_odo
       end
     end
-    show_winner
   end
 
   def check_max_odo
     puts @cars.max
   end
 
-  def check_win
-    winner = []
+  def check_max_odo
     max_odo = 0
     @cars.each do |car|
       max_odo = car.odo if max_odo < car.odo
     end
+    max_odo
+  end
+
+  def check_win
+    winner = []
+    max_odo = check_max_odo
     @cars.each do |car|
       winner << car if max_odo == car.odo
     end
     winner
   end
 
-  def show_winner
-    cars = check_win
-    puts "Winners:"
-    cars.each do |car|
-    puts car.name
-    end
-  end
 end
