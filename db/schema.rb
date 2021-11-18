@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2021_11_14_111427) do
     t.integer "max_gear"
     t.integer "max_speed"
     t.integer "odo"
+    t.integer "deleted", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -37,6 +38,7 @@ ActiveRecord::Schema.define(version: 2021_11_14_111427) do
   create_table "races", force: :cascade do |t|
     t.string "name"
     t.text "description"
+    t.integer "deleted", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

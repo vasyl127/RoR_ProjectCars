@@ -1,9 +1,9 @@
 require_relative "services/race/race_logic"
+require_relative "services/filter"
 
 
 class RacesController < ApplicationController
-before_action :set_races, :set_cars
-before_action :set_race, exception: %i[new create destroy add_race_car delete_race_car]
+before_action :filter_init, :set_race, :set_races, :set_cars, :set_car
 
   def index
   end
@@ -16,8 +16,6 @@ before_action :set_race, exception: %i[new create destroy add_race_car delete_ra
   end
 
   def add_race_car
-    @race = Race.find_by id: params[:race_id]
-    @car = Car.find_by id: params[:car_id]
     @race.cars += [@car]
     if @race.save
       redirect_to "/races/#{@race.id}"
@@ -27,8 +25,6 @@ before_action :set_race, exception: %i[new create destroy add_race_car delete_ra
   end
 
   def delete_race_car
-    @race = Race.find_by id: params[:race_id]
-    @car = Car.find_by id: params[:car_id]
     flash[:success] = "#{@car.name} was removed from the race"
     @race.cars.delete(@car)
     redirect_to "/races/#{@race.id}"
@@ -67,27 +63,36 @@ before_action :set_race, exception: %i[new create destroy add_race_car delete_ra
   end
 
   def destroy
-    @race.destroy
+    @race.deleted = 1
+    @race.save
     flash[:success] = 'Race deleted!'
     redirect_to races_path
   end
 
   private
 
+  def filter_init
+    @filter = Filter.new
+  end
+
   def race_params
     params.require(:race).permit(:name,:description)
   end
 
   def set_cars
-    @cars = Car.all
+    @cars = @filter.cars_all
+  end
+
+  def set_car
+    @car = @filter.car_by_id(params[:id]||params[:car_id])
   end
 
   def set_races
-    @races = Race.all
+    @races = @filter.races_all
   end
 
   def set_race
-    @race = Race.find_by id: params[:id]
+    @race = @filter.race_by_id(params[:id]||params[:race_id])
   end
 
 end
