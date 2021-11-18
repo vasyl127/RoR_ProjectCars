@@ -92,7 +92,7 @@ before_action :filter_init, :set_race, :set_races, :set_cars, :set_car
   end
 
   def set_car
-    @car = @filter.car_by_id(params[:id]||params[:car_id])
+    @car = @filter.car_by_id(params[:id] || params[:car_id])
   end
 
   def set_races
@@ -100,7 +100,7 @@ before_action :filter_init, :set_race, :set_races, :set_cars, :set_car
   end
 
   def set_race
-    @race = @filter.race_by_id(params[:id]||params[:race_id])
+    @race = @filter.race_by_id(params[:id] || params[:race_id])
   end
 
 end

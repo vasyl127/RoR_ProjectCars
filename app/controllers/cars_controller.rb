@@ -59,7 +59,7 @@ class CarsController < ApplicationController
   end
 
   def set_car
-    @car = @filter.car_by_id(params[:id]||params[:car_id])
+    @car = @filter.car_by_id(params[:id])
   end
 
 
