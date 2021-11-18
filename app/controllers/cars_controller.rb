@@ -1,3 +1,5 @@
+require_relative "services/filter"
+
 class CarsController < ApplicationController
   before_action :filter_init, :set_cars, :set_car
   

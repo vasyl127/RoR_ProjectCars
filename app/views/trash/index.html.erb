@@ -1,17 +1,27 @@
 <h3> Trash: </h3>
 
 <% if !@cars.empty? %>
-    Cars: <br>
     <% @cars.each do |car| %>
-        <%= car.name%>
-        <br>
+    <div class="card mb-2 mx-2" style="max-width: 12rem; max-height: 12rem;">
+        <%= render 'shared/card_form', object: car %>
+        <div class="card-footer">
+            <%= link_to 'View', car_path(car), class: 'btn btn-secondary'%>
+            <%= link_to 'Restore', "/trash/#{car.id}/restore_car", class: 'btn btn-success'%>
+        </div>
+    </div>
     <% end %>
 <% end %>
 
 <% if !@races.empty? %>
-    Races: <br>
     <% @races.each do |race| %>
-        <%= race.name%>
-        <br>
+    <div class="card mb-2 mx-2" style="max-width: 12rem; max-height: 12rem;">
+        <%= render 'shared/card_form', object: race %>
+        <div class="card-footer">
+            <%= link_to 'View', race_path(race), class: 'btn btn-secondary '%>
+            <%= link_to 'Restore', "/trash/#{race.id}/restore_race", class: 'btn btn-success'%>
+        </div>
+    </div>
     <% end %>
 <% end %>
+
+
