@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   resources :races
   resources :cars
+  resources :trash
 
   get 'about', to: 'pages#about'
   get 'faqs', to: 'pages#faqs'

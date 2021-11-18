@@ -1,0 +1,17 @@
+<h3> Trash: </h3>
+
+<% if !@cars.empty? %>
+    Cars: <br>
+    <% @cars.each do |car| %>
+        <%= car.name%>
+        <br>
+    <% end %>
+<% end %>
+
+<% if !@races.empty? %>
+    Races: <br>
+    <% @races.each do |race| %>
+        <%= race.name%>
+        <br>
+    <% end %>
+<% end %>

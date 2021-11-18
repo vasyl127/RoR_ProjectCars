@@ -62,9 +62,17 @@ before_action :filter_init, :set_race, :set_races, :set_cars, :set_car
     end
   end
 
+  def trash
+    @race = races_deleted
+  end
+
   def destroy
-    @race.deleted = 1
-    @race.save
+    if @race.deleted == 0
+      @race.deleted = 1
+      @race.save
+    else
+      @rece.destroy
+    end
     flash[:success] = 'Race deleted!'
     redirect_to races_path
   end
