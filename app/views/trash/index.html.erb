@@ -1,27 +1,19 @@
 <h3> Trash: </h3>
 
 <% if !@cars.empty? %>
-    <% @cars.each do |car| %>
-    <div class="card mb-2 mx-2" style="max-width: 12rem; max-height: 12rem;">
-        <%= render 'shared/card_form', object: car %>
-        <div class="card-footer">
-            <%= link_to 'View', car_path(car), class: 'btn btn-secondary'%>
-            <%= link_to 'Restore', "/trash/#{car.id}/restore_car", class: 'btn btn-success'%>
-        </div>
+    <div class="d-flex align-content-center flex-wrap ">
+        <% @cars.each do |car| %>
+            <%= render 'shared/card_form', object: car, btn: 'cars' %>
+        <% end %>
     </div>
-    <% end %>
 <% end %>
 
 <% if !@races.empty? %>
-    <% @races.each do |race| %>
-    <div class="card mb-2 mx-2" style="max-width: 12rem; max-height: 12rem;">
-        <%= render 'shared/card_form', object: race %>
-        <div class="card-footer">
-            <%= link_to 'View', race_path(race), class: 'btn btn-secondary '%>
-            <%= link_to 'Restore', "/trash/#{race.id}/restore_race", class: 'btn btn-success'%>
-        </div>
+    <div class="d-flex align-content-center flex-wrap ">
+        <% @races.each do |race| %>
+            <%= render 'shared/card_form', object: race, btn: 'races'%>
+        <% end %>
     </div>
-    <% end %>
 <% end %>
 
 

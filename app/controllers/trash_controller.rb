@@ -27,7 +27,7 @@ class TrashController < ApplicationController
     end
 
     def trash_init
-      @trash = TrashService.new
+        @trash = TrashService.new
     end
 
     def deleted_cars
