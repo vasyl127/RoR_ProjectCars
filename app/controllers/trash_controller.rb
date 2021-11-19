@@ -1,24 +1,22 @@
 require_relative "services/filter"
-
+require_relative "services/trash_service"
 
 class TrashController < ApplicationController
-    before_action :filter_init, :deleted_cars, :deleted_races, :set_car, :set_race
+    before_action :filter_init, :trash_init, :deleted_cars, :deleted_races, :set_car, :set_race
 
     def index
     end
 
     def restore_car
-        @car.deleted = 0
-        @car.save
-        flash[:success] = 'Car restored!'
+        @trash.restrore(@car)
+        flash[:success] =  "#{@car.name} restored!"
         redirect_to trash_index_path
     
     end
 
     def restore_race
-        @race.deleted = 0
-        @race.save
-        flash[:success] = 'Race restored!'
+        @trash.restrore(@race)
+        flash[:success] =  "#{@race.name} restored!"
         redirect_to trash_index_path
     end
 
@@ -26,6 +24,10 @@ class TrashController < ApplicationController
 
     def filter_init
         @filter = Filter.new
+    end
+
+    def trash_init
+      @trash = TrashService.new
     end
 
     def deleted_cars

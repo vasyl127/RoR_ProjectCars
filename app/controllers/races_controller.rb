@@ -1,9 +1,10 @@
 require_relative "services/race/race_logic"
 require_relative "services/filter"
+require_relative "services/trash_service"
 
 
 class RacesController < ApplicationController
-before_action :filter_init, :set_race, :set_races, :set_cars, :set_car
+before_action :filter_init, :trash_init, :set_race, :set_races, :set_cars, :set_car
 
   def index
   end
@@ -47,7 +48,7 @@ before_action :filter_init, :set_race, :set_races, :set_cars, :set_car
     @race = Race.new race_params
     if @race.save
       redirect_to races_path
-      flash[:success] = 'Race created!'
+      flash[:success] = "#{@race.name} created!"
     else
       render :new
     end
@@ -56,7 +57,7 @@ before_action :filter_init, :set_race, :set_races, :set_cars, :set_car
   def update
     if @race.update race_params
       redirect_to races_path
-      flash[:success] = 'Race updated!'
+      flash[:success] = "#{@race.name} updated!"
     else
       render :new
     end
@@ -67,9 +68,8 @@ before_action :filter_init, :set_race, :set_races, :set_cars, :set_car
   end
 
   def destroy
-    @race.deleted = 1
-    @race.save
-    flash[:success] = 'Race deleted!'
+    @trash.move_to_trash(@race)
+    flash[:success] = "#{@race.name} move to trash!"
     redirect_to races_path
   end
 
@@ -77,6 +77,10 @@ before_action :filter_init, :set_race, :set_races, :set_cars, :set_car
 
   def filter_init
     @filter = Filter.new
+  end
+
+  def trash_init
+    @trash = TrashService.new
   end
 
   def race_params

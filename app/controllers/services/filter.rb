@@ -3,10 +3,9 @@ require_relative "../../models/race"
 
 
 class Filter
-    attr_reader :car, :race
 
-    def initialize
-
+    def races_for_car(car_id)
+        RaceCar.where(car_id: car_id)
     end
 
     def cars_all

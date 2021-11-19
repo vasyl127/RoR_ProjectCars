@@ -1,7 +1,9 @@
 require_relative "services/filter"
+require_relative "services/trash_service"
+
 
 class CarsController < ApplicationController
-  before_action :filter_init, :set_cars, :set_car
+  before_action :filter_init, :trash_init, :set_cars, :set_car
   
   def index
   end
@@ -10,13 +12,8 @@ class CarsController < ApplicationController
   end
 
   def destroy
-    if @car.deleted == 0
-      @car.deleted = 1
-      @car.save
-    else
-      @car.destroy
-    end
-    flash[:success] = 'Car deleted!'
+    @trash.move_to_trash(@car)
+    flash[:success] = "#{@car.name} move to trash!"
     redirect_to cars_path
   end
 
@@ -30,7 +27,7 @@ class CarsController < ApplicationController
   def update
     if @car.update car_params
       redirect_to cars_path
-      flash[:success] = 'Car updated!'
+      flash[:success] = "#{@car.name} updated!"
     else
       render :new
     end
@@ -39,7 +36,7 @@ class CarsController < ApplicationController
   def create
     @car = Car.new car_params
     if @car.save
-      flash[:success] = 'Car created!'
+      flash[:success] = "#{@car.name} created!"
       redirect_to cars_path
     else
       render :new
@@ -54,6 +51,10 @@ class CarsController < ApplicationController
 
   def filter_init
     @filter = Filter.new
+  end
+
+  def trash_init
+    @trash = TrashService.new
   end
 
   def set_cars
