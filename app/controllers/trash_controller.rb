@@ -2,7 +2,7 @@ require_relative "services/filter"
 require_relative "services/trash_service"
 
 class TrashController < ApplicationController
-    before_action :filter_init, :trash_init, :deleted_cars, :deleted_races, :set_car, :set_race
+    before_action :filter_init, :trash_init, :set_cars, :set_races, :set_car, :set_race
 
     def index
     end
@@ -30,11 +30,11 @@ class TrashController < ApplicationController
         @trash = TrashService.new
     end
 
-    def deleted_cars
+    def set_cars
         @cars = @filter.cars_deleted
     end
 
-    def deleted_races
+    def set_races
         @races = @filter.races_deleted
     end
 
