@@ -1,4 +1,6 @@
-<h3> Trash: </h3>
+<%= link_to 'Clean trash', '/trash/clean', class: 'btn btn-danger '%>
+
+<h3 class = 'mb-4 mt-4'> Trash: </h3>
 
 <% if !@cars.empty? %>
     <div class="d-flex align-content-center flex-wrap ">

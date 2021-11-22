@@ -32,5 +32,4 @@ class Filter
         Race.where(deleted: 1)
     end
 
-
 end

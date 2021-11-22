@@ -1,0 +1,21 @@
+SAMPLE HTML
+<br>
+<% if !@cars.empty? %>
+    <% @cars.each do |car| %>
+        <p> <%= car.name %> has been deleted! </p>
+        <br>
+    <% end %>
+<% else %>
+    Trash dont have a car
+    <br>
+<% end %>
+
+<% if !@races.empty? %>
+    <% @races.each do |race| %>
+        <p> <%= race.name %> has been deleted! </p>
+        <br>
+    <% end %>
+<% else %>
+    Trash dont have a race
+    <br>
+<% end %>

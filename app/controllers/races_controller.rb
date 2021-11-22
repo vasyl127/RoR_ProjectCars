@@ -14,6 +14,7 @@ before_action :filter_init, :trash_init, :set_race, :set_races, :set_cars, :set_
 
   def select_car
     @race_car = @cars - @race.cars
+    # use filter
   end
 
   def add_race_car
@@ -28,6 +29,7 @@ before_action :filter_init, :trash_init, :set_race, :set_races, :set_cars, :set_
   def delete_race_car
     flash[:success] = "#{@car.name} was removed from the race"
     @race.cars.delete(@car)
+    # need fix
     redirect_to "/races/#{@race.id}"
   end
 
