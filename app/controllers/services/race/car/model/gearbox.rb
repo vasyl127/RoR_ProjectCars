@@ -1,4 +1,3 @@
-
 class Gearbox
   attr_reader :gear, :max_gear
 
@@ -14,6 +13,4 @@ class Gearbox
   def ch_max_gear(value)
     @max_gear = value
   end
-
-
 end

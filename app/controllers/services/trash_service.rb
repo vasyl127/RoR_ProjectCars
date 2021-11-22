@@ -1,28 +1,38 @@
+require_relative 'filter/car_filter'
+require_relative 'filter/race_filter'
+
 
 class TrashService
+  def restrore(obj)
+    obj.deleted = 0
+    obj.save
+  end
 
+  def trash_car(car)
+    car.races.delete_all
+    car.deleted = 1
+    car.save
+  end
 
-    def move_to_trash(obj)
-        obj.deleted = 1
-        obj.save
-        # flash[:success] = "#{obj.name} move to trash!"
-    end
+  def trash_race(race)
+    race.cars.delete_all
+    race.deleted = 1
+    race.save
+  end
 
-    def restrore(obj)
-        obj.deleted = 0
-        obj.save
-        # flash[:success] = "#{obj.name} restored!"
-    end
+  def destroy_items_in_trash
+    car_filter.cars_deleted.delete_all
+    race_filter.races_deleted.delete_all
+  end
 
-    def destroy_items_in_trash
-        filter.cars_deleted.delete_all
-        filter.races_deleted.delete_all
-    end
+  private
 
-    private 
+  def car_filter
+    car_filter ||= CarFilter.new
+  end
 
-    def filter
-      @filter ||= Filter.new
-    end
+  def race_filter
+    race_filter ||= RaceFilter.new
+  end
 
 end

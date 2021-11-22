@@ -1,6 +1,5 @@
-require_relative "eng_service"
-require_relative "gearbox_service"
-
+require_relative 'eng_service'
+require_relative 'gearbox_service'
 
 class CarService
   attr_reader :eng_service, :gb_service, :car, :engine, :gearbox
@@ -13,13 +12,9 @@ class CarService
     @gearbox = car.gearbox
   end
 
-  def odo
-    car.odo
-  end
+  delegate :odo, to: :car
 
-  def name
-    car.name
-  end
+  delegate :name, to: :car
 
   def start
     eng_service.start(engine)
@@ -40,13 +35,13 @@ class CarService
   def g_down
     gb_service.g_down(gearbox, engine)
   end
-  
+
   def shift_gear
     g_up if engine.rpm >= engine.torque
   end
 
   def shift_odo
-    car.ch_odo(car.odo + car.speed / 10)
+    car.ch_odo(car.odo + (car.speed / 10))
   end
 
   def shift_speed
@@ -58,5 +53,4 @@ class CarService
       end
     end
   end
-
 end

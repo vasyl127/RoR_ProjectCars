@@ -5,7 +5,6 @@ class CreateRaces < ActiveRecord::Migration[6.1]
       t.text :description
       t.integer :deleted, default: 0
 
-
       t.timestamps
     end
   end

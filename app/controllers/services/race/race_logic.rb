@@ -1,6 +1,5 @@
-require_relative "car/model/car_model"
-require_relative "car/car_controller"
-
+require_relative 'car/model/car_model'
+require_relative 'car/car_controller'
 
 class RaceLogic
   attr_reader :cars, :time
@@ -58,5 +57,4 @@ class RaceLogic
     end
     winner
   end
-
 end

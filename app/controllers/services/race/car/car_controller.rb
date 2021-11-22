@@ -1,63 +1,35 @@
 require_relative 'services/car_service'
 
-
 class CarController
-
   attr_reader :car_service
 
   def initialize(car)
     @car_service = CarService.new(car)
   end
 
-  def start
-    car_service.start
-  end
+  delegate :start, to: :car_service
 
-  def stop
-    car_service.stop
-  end
+  delegate :stop, to: :car_service
 
-  def gas
-    car_service.gas
-  end
+  delegate :gas, to: :car_service
 
-  def g_up
-    car_service.g_up
-  end
+  delegate :g_up, to: :car_service
 
-  def g_down
-    car_service.g_down
-  end
+  delegate :g_down, to: :car_service
 
-  def breake
-    car_service.breake
-  end
+  delegate :breake, to: :car_service
 
-  def car_state
-    car_service.car_state
-  end
+  delegate :car_state, to: :car_service
 
-  def shift_gear
-  car_service.shift_gear
-  end
+  delegate :shift_gear, to: :car_service
 
-  def shift_odo
-    car_service.shift_odo
-  end
+  delegate :shift_odo, to: :car_service
 
-  def shift_speed
-    car_service.shift_speed
-  end
+  delegate :shift_speed, to: :car_service
 
-  def car_state
-    car_service.car_state
-  end
+  delegate :car_state, to: :car_service
 
-  def odo
-    car_service.odo
-  end
+  delegate :odo, to: :car_service
 
-  def name
-    car_service.name
-  end
+  delegate :name, to: :car_service
 end

@@ -1,7 +1,4 @@
-
-
 class EngService
-
   def start(engine)
     engine.ch_rpm(1200)
   end
@@ -11,7 +8,6 @@ class EngService
   end
 
   def gas(engine)
-    engine.ch_rpm(engine.rpm+400) if engine.rpm < engine.max_rpm
+    engine.ch_rpm(engine.rpm + 400) if engine.rpm < engine.max_rpm
   end
-
 end

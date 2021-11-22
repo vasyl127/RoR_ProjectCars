@@ -1,7 +1,6 @@
 require_relative 'engine'
 require_relative 'gearbox'
 
-
 class CarModel
   attr_reader :speed, :odo, :max_speed, :engine, :gearbox, :name
 
@@ -25,6 +24,4 @@ class CarModel
   def ch_odo(value)
     @odo = value
   end
-
-
 end

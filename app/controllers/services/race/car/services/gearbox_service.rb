@@ -1,7 +1,4 @@
-
-
 class GearboxService
-  
   def g_up(gearbox, engine)
     if gearbox.gear < gearbox.max_gear && engine.rpm > 1200
       engine.ch_rpm(engine.rpm - 600)
@@ -15,5 +12,4 @@ class GearboxService
       gearbox.ch_gear(gearbox.gear - 1)
     end
   end
-
 end

@@ -1,7 +1,6 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-
   mount Sidekiq::Web => 'sidekiq'
 
   resources :races
@@ -18,7 +17,5 @@ Rails.application.routes.draw do
   get '/races/:race_id/add_race_car/:car_id', to: 'races#add_race_car'
   get '/races/:race_id/delete_race_car/:car_id', to: 'races#delete_race_car'
 
-
   root 'pages#index'
-
 end

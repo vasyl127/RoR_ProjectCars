@@ -1,4 +1,3 @@
-
 class Engine
   attr_reader :rpm, :max_rpm, :torque
 
@@ -19,6 +18,4 @@ class Engine
   def ch_torque(value)
     @torque = value
   end
-
-
 end

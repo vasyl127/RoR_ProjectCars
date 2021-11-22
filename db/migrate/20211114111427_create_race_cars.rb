@@ -7,6 +7,6 @@ class CreateRaceCars < ActiveRecord::Migration[6.1]
       t.timestamps
     end
 
-    add_index :race_cars, [:race_id, :car_id], unique: true
+    add_index :race_cars, %i[race_id car_id], unique: true
   end
 end

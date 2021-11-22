@@ -1,4 +1,4 @@
-require "active_support/core_ext/integer/time"
+require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
@@ -40,7 +40,6 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :letter_opener
   config.action_mailer.perform_deliveries = true
   config.action_mailer.default_url_options = { host: 'localhost:3000' }
-
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

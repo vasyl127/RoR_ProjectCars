@@ -1,18 +1,15 @@
-require_relative "services/filter"
-require_relative "services/trash_service"
-
+require_relative 'services/filter/filter'
+require_relative 'trash_controller'
 
 class CarsController < ApplicationController
-  before_action :filter_init, :trash_init, :set_cars, :set_car
-  
-  def index
-  end
+  before_action :set_cars, :set_car
 
-  def show
-  end
+  def index; end
+
+  def show; end
 
   def destroy
-    @trash.move_to_trash(@car)
+    trash.trash_car(@car)
     flash[:success] = "#{@car.name} move to trash!"
     redirect_to cars_path
   end
@@ -21,8 +18,7 @@ class CarsController < ApplicationController
     @car = Car.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @car.update car_params
@@ -49,21 +45,19 @@ class CarsController < ApplicationController
     params.require(:car).permit(:name, :max_rpm, :torque, :max_gear, :max_speed, :description)
   end
 
-  def filter_init
-    @filter = Filter.new
+  def car_filter
+    car_filter ||= CarFilter.new
   end
 
-  def trash_init
-    @trash = TrashService.new
+  def trash
+    trash ||= TrashController.new
   end
 
   def set_cars
-    @cars = @filter.cars_all
+    @cars = car_filter.cars_all
   end
 
   def set_car
-    @car = @filter.car_by_id(params[:id])
+    @car = car_filter.car_by_id(params[:id])
   end
-
-
 end
