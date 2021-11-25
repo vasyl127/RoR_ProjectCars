@@ -4,16 +4,18 @@ require_relative 'services/filter/car_filter'
 require_relative 'services/trash_service'
 
 class RacesController < ApplicationController
-  before_action :set_race, :set_races, :set_cars, :set_car
+  before_action :set_races, only: %i[index]
+  before_action :set_race, except: %i[index new create]
+  before_action :set_cars, only: %i[select_car]
+  before_action :set_car, only: %i[select_car add_race_car delete_race_car]
 
   def index; end
 
   def show; end
 
   def select_car
-    @race_car = @cars - @race.cars
-    # @race_car = race_filter.cars_not_in_race(@race)
-    # use filter
+    # @race_car = @cars - @race.cars
+    @race_car = race_filter.cars_not_in_race(@cars, @race)
   end
 
   def add_race_car
@@ -39,6 +41,7 @@ class RacesController < ApplicationController
     @race_logic.add_cars(race_filter.cars_in_race(@race))
     @winner = @race_logic.race_on_time
     @cars = @race_logic.cars
+    # @cars.sort_by { |cars| cars.odo }
   end
 
   def create

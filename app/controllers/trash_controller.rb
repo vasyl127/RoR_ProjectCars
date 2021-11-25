@@ -2,7 +2,9 @@ require_relative 'services/filter/filter'
 require_relative 'services/trash_service'
 
 class TrashController < ApplicationController
-  before_action :cars, :races, :set_car, :set_race
+  before_action :cars, :races, only: %i[index restore_all clean]
+  before_action :set_car, only: %i[restore_car trash_car]
+  before_action :set_race, only: %i[restore_race trash_race]
 
   def index; end
 
@@ -25,7 +27,7 @@ class TrashController < ApplicationController
 
   delegate :trash_race, to: :trash_service
 
-  def clean
+  def clean_all
     trash_service.destroy_items_in_trash
     redirect_to trash_path
   end
