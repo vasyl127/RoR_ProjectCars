@@ -35,7 +35,6 @@ class RacesController < ApplicationController
   def edit; end
 
   def start_race
-    # @race , @races, @cars
     @race_logic = RaceLogic.new
     @race_logic.add_cars(race_filter.cars_in_race(@race))
   end
