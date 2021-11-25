@@ -14,15 +14,14 @@ name = 1
 max_rpm = 8000
 torque = 4100
 max_gear = 12
-max_speed = 210 
+max_speed = 210
 
 10.times do
-  Car.create(name: "Car ##{name.to_s}", description: "Test Car ##{name.to_s}", max_rpm: max_rpm,
-    torque: torque, max_gear: max_gear, max_speed: max_speed)
+  Car.create(name: "Car ##{name}", description: "Test Car ##{name}", max_rpm: max_rpm,
+             torque: torque, max_gear: max_gear, max_speed: max_speed)
   name += 1
   max_rpm -= 300
   torque -= 200
   max_gear -= 1
   max_speed -= 10
 end
-
