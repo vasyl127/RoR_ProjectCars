@@ -4,19 +4,24 @@ require_relative 'filter/race_filter'
 
 class TrashService
   def restrore(obj)
-    obj.deleted = 0
+    obj.update deleted: 0
     obj.save
+  end
+
+  def restrore_all(cars, races)
+    car_filter.cars_deleted.update deleted: 0
+    race_filter.races_deleted.update deleted: 0
   end
 
   def trash_car(car)
     car.races.delete_all
-    car.deleted = 1
+    car.update deleted: 1
     car.save
   end
 
   def trash_race(race)
     race.cars.delete_all
-    race.deleted = 1
+    race.update deleted: 1
     race.save
   end
 

@@ -6,6 +6,11 @@ class TrashController < ApplicationController
 
   def index; end
 
+  def restore_all
+    trash_service.restrore_all(@cars, @races)
+    redirect_to trash_path
+  end
+
   def restore_car
     flash[:success] = "#{@car.name} restored!" if trash_service.restrore(@car)
     redirect_to trash_path

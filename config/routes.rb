@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get '/trash/:id/restore_car', to: 'trash#restore_car'
   get '/trash/:id/restore_race', to: 'trash#restore_race'
   get '/trash/clean', to: 'trash#clean'
+  get '/trash/restore_all', to: 'trash#restore_all'
   get '/races/:id/select_car', to: 'races#select_car'
   get '/races/:id/start_race', to: 'races#start_race'
   get '/races/:race_id/add_race_car/:car_id', to: 'races#add_race_car'
