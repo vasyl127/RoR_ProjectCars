@@ -10,7 +10,19 @@ Race.create(name: 'Race #1', description: 'Test Race #1')
 Race.create(name: 'Race #2', description: 'Test Race #2')
 Race.create(name: 'Race #3', description: 'Test Race #3')
 
-Car.create(name: 'Car #1', description: 'Test Car #1', max_rpm: 8000, torque: 4100, max_gear: 8, max_speed: 210)
-Car.create(name: 'Car #2', description: 'Test Car #2', max_rpm: 7000, torque: 3100, max_gear: 7, max_speed: 190)
-Car.create(name: 'Car #3', description: 'Test Car #3', max_rpm: 6000, torque: 2800, max_gear: 6, max_speed: 170)
-Car.create(name: 'Car #4', description: 'Test Car #4', max_rpm: 5000, torque: 1900, max_gear: 5, max_speed: 150)
+name = 1
+max_rpm = 8000
+torque = 4100
+max_gear = 12
+max_speed = 210 
+
+10.times do
+  Car.create(name: "Car ##{name.to_s}", description: "Test Car ##{name.to_s}", max_rpm: max_rpm,
+    torque: torque, max_gear: max_gear, max_speed: max_speed)
+  name += 1
+  max_rpm -= 300
+  torque -= 200
+  max_gear -= 1
+  max_speed -= 10
+end
+

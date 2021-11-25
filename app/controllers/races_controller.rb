@@ -37,6 +37,8 @@ class RacesController < ApplicationController
   def start_race
     @race_logic = RaceLogic.new
     @race_logic.add_cars(race_filter.cars_in_race(@race))
+    @winner = @race_logic.race_on_time
+    @cars = @race_logic.cars
   end
 
   def create

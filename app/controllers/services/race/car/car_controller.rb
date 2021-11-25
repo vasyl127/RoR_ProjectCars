@@ -32,4 +32,6 @@ class CarController
   delegate :odo, to: :car_service
 
   delegate :name, to: :car_service
+
+  delegate :speed, to: :car_service
 end

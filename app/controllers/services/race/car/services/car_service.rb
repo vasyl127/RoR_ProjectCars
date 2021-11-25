@@ -14,6 +14,8 @@ class CarService
 
   delegate :odo, to: :car
 
+  delegate :speed, to: :car
+
   delegate :name, to: :car
 
   def start
