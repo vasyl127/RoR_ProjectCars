@@ -3,7 +3,7 @@ require_relative '../../../models/race'
 
 class Filter
   def cars_in_race(race)
-    race.cars
+    race.cars  
   end
 
   def races_for_car(car)

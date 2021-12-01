@@ -36,14 +36,18 @@ class RacesController < ApplicationController
 
   def edit; end
 
+  #fix
   def start_race
     @race_logic = RaceLogic.new
+    #fix
     @race_logic.add_cars(race_filter.cars_in_race(@race))
     @winner = @race_logic.race_on_time
     @cars = @race_logic.cars
-    # @cars.sort_by { |cars| cars.odo }
+
+    @cars = @cars.sort_by(&:odo).reverse
   end
 
+  #fix
   def create
     @race = Race.new race_params
     if @race.save

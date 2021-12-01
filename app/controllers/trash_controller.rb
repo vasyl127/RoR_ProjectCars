@@ -2,14 +2,14 @@ require_relative 'services/filter/filter'
 require_relative 'services/trash_service'
 
 class TrashController < ApplicationController
-  before_action :cars, :races, only: %i[index restore_all clean]
+  before_action :cars, :races, only: %i[index restore_all clean_all]
   before_action :set_car, only: %i[restore_car trash_car]
   before_action :set_race, only: %i[restore_race trash_race]
 
   def index; end
 
   def restore_all
-    trash_service.restrore_all(@cars, @races)
+    trash_service.restrore_all
     redirect_to trash_path
   end
 
@@ -30,6 +30,10 @@ class TrashController < ApplicationController
   def clean_all
     trash_service.destroy_items_in_trash
     redirect_to trash_path
+  end
+
+  def trash_empty?
+    @cars.empty? and @race.empty?
   end
 
   private

@@ -7,19 +7,23 @@ class TrashService
     obj.save
   end
 
-  def restrore_all(cars, races)
+  def restrore_all
     car_filter.cars_deleted.update deleted: 0
     race_filter.races_deleted.update deleted: 0
   end
 
   def trash_car(car)
+    #race_id
     car.races.delete_all
+    #fix
     car.update deleted: 1
     car.save
   end
 
   def trash_race(race)
+    #race_id
     race.cars.delete_all
+    #fix
     race.update deleted: 1
     race.save
   end
