@@ -1,4 +1,5 @@
 require_relative 'services/filter/filter'
+require_relative 'services/cars_service'
 require_relative 'trash_controller'
 
 class CarsController < ApplicationController
@@ -22,7 +23,7 @@ class CarsController < ApplicationController
   def edit; end
 
   def update
-    if @car.update car_params
+    if cars_service.update(@car, car_params)
       redirect_to cars_path
       flash[:success] = "#{@car.name} updated!"
     else
@@ -31,9 +32,8 @@ class CarsController < ApplicationController
   end
 
   def create
-    @car = Car.new car_params
-    if @car.save
-      flash[:success] = "#{@car.name} created!"
+    if cars_service.create(car_params)
+      flash[:success] = "Car created!"
       redirect_to cars_path
     else
       render :new
@@ -44,6 +44,10 @@ class CarsController < ApplicationController
 
   def car_params
     params.require(:car).permit(:name, :max_rpm, :torque, :max_gear, :max_speed, :description)
+  end
+
+  def cars_service
+    cars_service ||= CarsService.new
   end
 
   def car_filter

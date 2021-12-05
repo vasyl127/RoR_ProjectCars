@@ -1,4 +1,3 @@
-require_relative 'services/race/race_logic'
 require_relative 'services/races_service'
 require_relative 'services/filter/race_filter'
 require_relative 'services/filter/car_filter'
@@ -53,7 +52,7 @@ class RacesController < ApplicationController
   def update
     if races_service.update(@race, race_params)
       redirect_to races_path
-      flash[:success] = "Race updated!"
+      flash[:success] = "#{@race.name} updated!"
     else
       render :new
     end
