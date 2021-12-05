@@ -38,8 +38,7 @@ class RacesController < ApplicationController
   def edit; end
 
   def start_race
-    @cars_list = races_service.start_race(race_filter.cars_in_race(@race), @race)
-    @cars_list = @cars_list.sort_by(&:odo).reverse
+    @cars_list = races_service.start_race(race_filter.cars_in_race(@race), @race).sort_by(&:odo).reverse
     @race_conf = races_service.race_conf
   end
 
