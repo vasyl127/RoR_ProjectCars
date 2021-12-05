@@ -14,7 +14,7 @@ class RacesController < ApplicationController
   def show; end
 
   def select_car
-    @race_car = race_filter.cars_not_in_race(@cars, @race)
+    @race_car = race_filter.cars_not_in_race(@race)
   end
 
   def add_race_car

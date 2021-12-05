@@ -10,9 +10,7 @@ class Filter
     car.races
   end
 
-  def cars_not_in_race(cars, race)
-    race_car = cars - cars_in_race(race)
-    # race_car = Car.where.not(race_id: race.id)
-    # race_car = Car.where(race_id: !race.id)
+  def cars_not_in_race(race)
+    Car.where("id not in (?)", cars_in_race(race).ids)
   end
 end
