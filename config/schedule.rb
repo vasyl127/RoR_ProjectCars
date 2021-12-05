@@ -4,7 +4,6 @@
 # http://en.wikipedia.org/wiki/Cron
 
 env :PATH, ENV['PATH']
-set :output, 'log/cron.log'
 
 # Example:
 #
@@ -22,6 +21,9 @@ set :output, 'log/cron.log'
 
 # Learn more: http://github.com/javan/whenever
 
-every 1.minutes do
+set :output, 'log/cron.log'
+
+
+every 1.minute do
   runner "TrashCleanJob.perform_later"
 end

@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2021_11_14_111427) do
 
-  create_table "cars", force: :cascade do |t|
+  create_table "cars", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.integer "max_rpm"
@@ -25,9 +25,9 @@ ActiveRecord::Schema.define(version: 2021_11_14_111427) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "race_cars", force: :cascade do |t|
-    t.integer "race_id", null: false
-    t.integer "car_id", null: false
+  create_table "race_cars", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "race_id", null: false
+    t.bigint "car_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["car_id"], name: "index_race_cars_on_car_id"
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 2021_11_14_111427) do
     t.index ["race_id"], name: "index_race_cars_on_race_id"
   end
 
-  create_table "races", force: :cascade do |t|
+  create_table "races", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.integer "deleted", default: 0

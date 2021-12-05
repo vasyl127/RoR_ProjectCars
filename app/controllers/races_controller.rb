@@ -1,4 +1,5 @@
 require_relative 'services/race/race_logic'
+require_relative 'services/races_service'
 require_relative 'services/filter/race_filter'
 require_relative 'services/filter/car_filter'
 require_relative 'services/trash_service'
@@ -14,7 +15,6 @@ class RacesController < ApplicationController
   def show; end
 
   def select_car
-    # @race_car = @cars - @race.cars
     @race_car = race_filter.cars_not_in_race(@cars, @race)
   end
 
@@ -36,32 +36,24 @@ class RacesController < ApplicationController
 
   def edit; end
 
-  #fix
   def start_race
-    @race_logic = RaceLogic.new
-    #fix
-    @race_logic.add_cars(race_filter.cars_in_race(@race))
-    @winner = @race_logic.race_on_time
-    @cars = @race_logic.cars
-
-    @cars = @cars.sort_by(&:odo).reverse
+    @cars_list = races_service.start_race_on_time(race_filter.cars_in_race(@race)).sort_by(&:odo).reverse
+    @time = races_service.race_time
   end
 
-  #fix
   def create
-    @race = Race.new race_params
-    if @race.save
+    if races_service.create(race_params)
       redirect_to races_path
-      flash[:success] = "#{@race.name} created!"
+      flash[:success] = "Race created!"
     else
       render :new
     end
   end
 
   def update
-    if @race.update race_params
+    if races_service.update(@race, race_params)
       redirect_to races_path
-      flash[:success] = "#{@race.name} updated!"
+      flash[:success] = "Race updated!"
     else
       render :new
     end
@@ -74,6 +66,10 @@ class RacesController < ApplicationController
   end
 
   private
+
+  def races_service
+    races_service ||= RacesService.new
+  end
 
   def race_filter
     race_filter ||= RaceFilter.new

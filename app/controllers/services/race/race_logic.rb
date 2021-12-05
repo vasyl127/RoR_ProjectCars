@@ -25,7 +25,8 @@ class RaceLogic
     end
   end
 
-  def race_on_time
+  def race_on_time(objects)
+    add_cars(objects)
     cars_preparation
     @time.times do
       @cars.each do |car|
@@ -35,7 +36,7 @@ class RaceLogic
         car.shift_odo
       end
     end
-    check_win
+    cars
   end
 
   def check_max_odo

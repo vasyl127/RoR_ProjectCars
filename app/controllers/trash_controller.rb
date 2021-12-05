@@ -2,7 +2,7 @@ require_relative 'services/filter/filter'
 require_relative 'services/trash_service'
 
 class TrashController < ApplicationController
-  before_action :cars, :races, only: %i[index restore_all clean_all]
+  before_action :cars, :races, only: %i[index restore_all clean_all trash_present?]
   before_action :set_car, only: %i[restore_car trash_car]
   before_action :set_race, only: %i[restore_race trash_race]
 
@@ -14,12 +14,12 @@ class TrashController < ApplicationController
   end
 
   def restore_car
-    flash[:success] = "#{@car.name} restored!" if trash_service.restrore(@car)
+    flash[:success] = "#{@car.name} restored!" if trash_service.restrore_obj(@car)
     redirect_to trash_path
   end
 
   def restore_race
-    flash[:success] = "#{@race.name} restored!" if trash_service.restrore(@race)
+    flash[:success] = "#{@race.name} restored!" if trash_service.restrore_obj(@race)
     redirect_to trash_path
   end
 
@@ -32,8 +32,8 @@ class TrashController < ApplicationController
     redirect_to trash_path
   end
 
-  def trash_empty?
-    @cars.empty? and @race.empty?
+  def trash_present?
+    @cars.present? and @race.present?
   end
 
   private

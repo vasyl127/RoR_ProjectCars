@@ -2,7 +2,8 @@ require_relative 'filter/car_filter'
 require_relative 'filter/race_filter'
 
 class TrashService
-  def restrore(obj)
+
+  def restrore_obj(obj)
     obj.update deleted: 0
     obj.save
   end
