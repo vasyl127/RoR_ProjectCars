@@ -7,7 +7,6 @@ class CreateCars < ActiveRecord::Migration[6.1]
       t.integer :torque
       t.integer :max_gear
       t.integer :max_speed
-      t.integer :odo
       t.integer :deleted, default: 0
 
       t.timestamps

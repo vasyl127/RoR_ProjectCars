@@ -14,7 +14,8 @@ class RacesController < ApplicationController
   def show; end
 
   def select_car
-    @race_car = race_filter.cars_not_in_race(@race)
+    @race_car = @cars - @race.cars
+    # @race_car = race_filter.cars_not_in_race(@race)
   end
 
   def add_race_car
@@ -36,8 +37,9 @@ class RacesController < ApplicationController
   def edit; end
 
   def start_race
-    @cars_list = races_service.start_race_on_time(race_filter.cars_in_race(@race)).sort_by(&:odo).reverse
-    @time = races_service.race_time
+    @cars_list = races_service.start_race(race_filter.cars_in_race(@race), @race)
+    @cars_list = @cars_list.sort_by(&:odo).reverse
+    @race_conf = races_service.race_conf
   end
 
   def create
@@ -51,7 +53,7 @@ class RacesController < ApplicationController
 
   def update
     if races_service.update(@race, race_params)
-      redirect_to races_path
+      redirect_to race_path
       flash[:success] = "#{@race.name} updated!"
     else
       render :new
@@ -83,7 +85,7 @@ class RacesController < ApplicationController
   end
 
   def race_params
-    params.require(:race).permit(:name, :description)
+    params.require(:race).permit(:name, :description, :race_type)
   end
 
   def set_cars

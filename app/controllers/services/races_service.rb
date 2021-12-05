@@ -16,12 +16,24 @@ class RacesService
     race_logic ||= RaceLogic.new
   end
 
-  def start_race_on_time(cars)
+  def start_race(cars, race)
+    if race.race_type == "on_time" 
+      race_logic.race_on_time(cars)
+    else
+      race_logic.race_on_dist(cars)
+    end
+  end
+
+  def race_on_time(cars)
     race_logic.race_on_time(cars)
   end
 
-  def race_time
-    race_logic.time
+  def race_on_dist(cars)
+    race_logic.race_on_dist(cars)
+  end
+
+  def race_conf
+    race_conf = {time: race_logic.time, dist: race_logic.dist}
   end
 
 end

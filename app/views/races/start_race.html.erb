@@ -1,4 +1,8 @@
-<h4>Race for a time (<%= @time %>sec) </h4> <br>
+<% if @race.race_type == 'on_time' %>
+<h4>Race for a time (<%= @race_conf[:time] %>sec) </h4> <br> 
+<% else %>
+<h4>Race for a distance (<%= @race_conf[:dist] %>m) </h4> <br>
+<% end %>
 <h4>Cars on race list:</h4>
 <ul class="list-group mb-2" style="max-width: 35rem;">
 <% @cars_list.each do |car| %>

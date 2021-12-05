@@ -2,11 +2,12 @@ require_relative 'car/model/car_model'
 require_relative 'car/car_controller'
 
 class RaceLogic
-  attr_reader :cars, :time
+  attr_reader :cars, :time, :dist
 
   def initialize
     @cars = []
     @time = 60
+    @dist = 2000
   end
 
   def add_cars(cars)
@@ -19,40 +20,45 @@ class RaceLogic
     @cars << CarController.new(CarModel.new(car))
   end
 
-  def cars_preparation
+  def cars_preparation(objects)
+    add_cars(objects)
     @cars.each do |car|
       car.start
     end
   end
 
   def race_on_time(objects)
-    add_cars(objects)
-    cars_preparation
+    cars_preparation(objects)
     @time.times do
       @cars.each do |car|
-        car.gas
-        car.shift_gear
-        car.shift_speed
-        car.shift_odo
+        race_body(car)
       end
     end
     cars
   end
 
-  def check_max_odo
-    max_odo = 0
-    @cars.each do |car|
-      max_odo = car.odo if max_odo < car.odo
+  def race_on_dist(objects)
+    cars_preparation(objects)
+    while !check_odo
+      @cars.each do |car|
+        race_body(car)
+      end
     end
-    max_odo
+    cars
   end
 
-  def check_win
-    winner = []
-    max_odo = check_max_odo
+  def race_body(car)
+      car.gas
+      car.shift_gear
+      car.shift_speed
+      car.shift_odo
+  end
+
+  def check_odo
+    check = false
     @cars.each do |car|
-      winner << car if max_odo == car.odo
+      check = true if car.odo >= @dist
     end
-    winner
+    check
   end
 end
