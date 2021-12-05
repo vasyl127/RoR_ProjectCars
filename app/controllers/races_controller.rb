@@ -43,9 +43,12 @@ class RacesController < ApplicationController
   end
 
   def create
-    if races_service.create(race_params)
+    # if races_service.create(race_params)
+    # dont work errors message
+    @race = Race.new race_params
+    if @race.save
       redirect_to races_path
-      flash[:success] = "Race created!"
+      flash[:success] = 'Race created!'
     else
       render :new
     end

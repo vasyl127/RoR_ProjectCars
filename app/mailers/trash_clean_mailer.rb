@@ -1,4 +1,3 @@
-
 class TrashCleanMailer < ApplicationMailer
   before_action :check_adm_email
 

@@ -1,6 +1,5 @@
 require_relative 'race/race_logic'
 
-
 class RacesService
   def create(race_params)
     race = Race.new race_params
@@ -17,23 +16,18 @@ class RacesService
   end
 
   def start_race(cars, race)
-    if race.race_type == "on_time" 
+    if race.race_type == 'on_time'
       race_logic.race_on_time(cars)
     else
       race_logic.race_on_dist(cars)
     end
   end
 
-  def race_on_time(cars)
-    race_logic.race_on_time(cars)
-  end
+  delegate :race_on_time, to: :race_logic
 
-  def race_on_dist(cars)
-    race_logic.race_on_dist(cars)
-  end
+  delegate :race_on_dist, to: :race_logic
 
   def race_conf
-    race_conf = {time: race_logic.time, dist: race_logic.dist}
+    race_conf = { time: race_logic.time, dist: race_logic.dist }
   end
-
 end

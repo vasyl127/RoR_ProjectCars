@@ -26,9 +26,9 @@ max_speed = 210
   max_speed -= 10
 end
 
-Car.create(name: "Car S", description: "Car low power", max_rpm: 5000,
-  torque: 2400, max_gear: 3, max_speed: 140)
-Car.create(name: "Car XL", description: "Car super power", max_rpm: 12000,
-  torque: 8900, max_gear: 12, max_speed: 370)
-Car.create(name: "Car L", description: "Car norm power", max_rpm: 7000,
-  torque: 4100, max_gear: 6, max_speed: 210)
+Car.create(name: 'Car S', description: 'Car low power', max_rpm: 5000,
+           torque: 2400, max_gear: 3, max_speed: 140)
+Car.create(name: 'Car XL', description: 'Car super power', max_rpm: 12_000,
+           torque: 8900, max_gear: 12, max_speed: 370)
+Car.create(name: 'Car L', description: 'Car norm power', max_rpm: 7000,
+           torque: 4100, max_gear: 6, max_speed: 210)

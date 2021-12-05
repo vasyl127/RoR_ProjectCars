@@ -4,7 +4,7 @@ require_relative 'trash_controller'
 
 class CarsController < ApplicationController
   before_action :set_cars, only: %i[index]
-  before_action :set_car, only: %i[show destroy edit update]
+  before_action :set_car, only: %i[destroy edit update show create]
 
   def index; end
 
@@ -32,8 +32,11 @@ class CarsController < ApplicationController
   end
 
   def create
-    if cars_service.create(car_params)
-      flash[:success] = "Car created!"
+    # if cars_service.create(car_params)
+    # dont work errors messages, need fix
+    @car = Car.new car_params
+    if @car.save
+      flash[:success] = 'Car created!'
       redirect_to cars_path
     else
       render :new

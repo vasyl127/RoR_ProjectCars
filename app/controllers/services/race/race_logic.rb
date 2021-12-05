@@ -39,7 +39,7 @@ class RaceLogic
 
   def race_on_dist(objects)
     cars_preparation(objects)
-    while !check_odo
+    until check_odo
       @cars.each do |car|
         race_body(car)
       end
@@ -48,10 +48,10 @@ class RaceLogic
   end
 
   def race_body(car)
-      car.gas
-      car.shift_gear
-      car.shift_speed
-      car.shift_odo
+    car.gas
+    car.shift_gear
+    car.shift_speed
+    car.shift_odo
   end
 
   def check_odo

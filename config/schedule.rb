@@ -23,7 +23,6 @@ env :PATH, ENV['PATH']
 
 set :output, 'log/cron.log'
 
-
 every 1.minute do
-  runner "TrashCleanJob.perform_later"
+  runner 'TrashCleanJob.perform_later'
 end

@@ -3,7 +3,7 @@ require_relative '../../../models/race'
 
 class Filter
   def cars_in_race(race)
-    race.cars  
+    race.cars
   end
 
   def races_for_car(car)
@@ -11,6 +11,6 @@ class Filter
   end
 
   def cars_not_in_race(race)
-    Car.where("id not in (?)", cars_in_race(race).ids)
+    Car.where.not(id: cars_in_race(race).ids)
   end
 end
