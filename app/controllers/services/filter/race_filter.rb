@@ -1,15 +1,11 @@
 require_relative 'filter'
 
 class RaceFilter < Filter
-  def races_all
-    Race.where(deleted: 0)
-  end
+  def initialize
+    super(Race)
+  end   
 
-  def races_deleted
-    Race.where(deleted: 1)
-  end
-
-  def race_by_id(id)
-    Race.find_by id: id
+  def races_for_car(car)
+    Race.joins(:race_cars).where('race_cars.car_id = ?', car.id)
   end
 end

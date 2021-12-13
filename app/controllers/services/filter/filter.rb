@@ -2,15 +2,21 @@ require_relative '../../../models/car'
 require_relative '../../../models/race'
 
 class Filter
-  def cars_in_race(race)
-    race.cars
+  attr_reader :scope
+   
+  def initialize(scope)
+    @scope = scope
   end
 
-  def races_for_car(car)
-    car.races
+  def find_actice
+    scope.where(deleted: 0)
   end
 
-  def cars_not_in_race(race)
-    Car.where.not(id: cars_in_race(race).ids)
+  def find_deleted
+    scope.where(deleted: 1)
+  end
+
+  def find_by_id(id)
+    scope.find_by id: id
   end
 end

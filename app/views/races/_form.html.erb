@@ -7,9 +7,9 @@
   <%= f.text_field :description, placeholder: "Descritpion", class: 'form-control' %>
   <%= f.label "Race type:", class: 'my-2'  %>
   <ul>  <%= f.radio_button :race_type, "on_dist"%>
-    <%= f.label "Race on distance" %> </ul>
+    <%= f.label "Race on distance(2000m)" %> </ul>
   <ul>  <%= f.radio_button :race_type, "on_time"%>
-    <%= f.label "Race on time" %> </ul>
+    <%= f.label "Race on time(60sec)" %> </ul>
   <br>
   <%= f.submit "Submit!", class: 'btn btn-primary'%>
 <% end %>

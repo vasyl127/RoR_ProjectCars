@@ -14,9 +14,7 @@ class RacesController < ApplicationController
   def show; end
 
   def select_car
-    ###########
-    @race_car = @cars - @race.cars
-    # @race_car = race_filter.cars_not_in_race(@race)
+    @race_car = race_filter.cars_not_in_race(@race)
   end
 
   def add_race_car
@@ -44,7 +42,7 @@ class RacesController < ApplicationController
 
   def create
     # if races_service.create(race_params)
-    # dont work errors message
+    # dont work errors messages, need fix
     @race = Race.new race_params
     if @race.save
       redirect_to races_path

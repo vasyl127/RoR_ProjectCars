@@ -29,8 +29,12 @@ class TrashService
   end
 
   def destroy_items_in_trash
-    car_filter.cars_deleted.delete_all
-    race_filter.races_deleted.delete_all
+    car_filter.find_deleted.delete_all
+    race_filter.find_deleted.delete_all
+  end
+
+  def have_obj?
+    car_filter.find_deleted.present? or race_filter.find_deleted.present?
   end
 
   private

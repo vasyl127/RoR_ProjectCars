@@ -2,6 +2,8 @@ class CarsService
   def create(car_params)
     car = Car.new car_params
     car.save
+
+    car
   end
 
   def update(car, car_params)

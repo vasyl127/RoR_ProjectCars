@@ -32,10 +32,8 @@ class CarsController < ApplicationController
   end
 
   def create
-    # if cars_service.create(car_params)
-    # dont work errors messages, need fix
-    @car = Car.new car_params
-    if @car.save
+    @car = cars_service.create(car_params)
+    if @car.persisted?
       flash[:success] = 'Car created!'
       redirect_to cars_path
     else
@@ -62,10 +60,10 @@ class CarsController < ApplicationController
   end
 
   def set_cars
-    @cars = car_filter.cars_all
+    @cars = car_filter.find_actice
   end
 
   def set_car
-    @car = car_filter.car_by_id(params[:id])
+    @car = car_filter.find_by_id(params[:id])
   end
 end

@@ -1,3 +1,5 @@
+Trash present: <%= @trash_service.have_obj?.inspect %> <hr>
+
 <%= link_to 'Clean trash', '/trash/clean', class: 'btn btn-danger '%>
 <%= link_to 'Restore All', '/trash/restore_all', class: 'btn btn-success '%>
 

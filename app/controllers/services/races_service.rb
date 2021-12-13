@@ -1,4 +1,5 @@
 require_relative 'race/race_logic'
+require_relative 'filter/race_filter'
 
 class RacesService
   def create(race_params)
@@ -10,6 +11,10 @@ class RacesService
     race.update race_params
     race.save
   end
+
+  def add_to_race(car, race)
+    race_filter.cars_in_race(race) << car
+  end 
 
   def race_logic
     race_logic ||= RaceLogic.new
@@ -30,4 +35,11 @@ class RacesService
   def race_conf
     race_conf = { time: race_logic.time, dist: race_logic.dist }
   end
+
+  private
+
+  def race_filter
+    race_filter ||= RaceFilter.new
+  end
+
 end

@@ -6,7 +6,9 @@ class TrashController < ApplicationController
   before_action :set_car, only: %i[restore_car trash_car]
   before_action :set_race, only: %i[restore_race trash_race]
 
-  def index; end
+  def index
+  @trash_service = trash_service
+  end
 
   def restore_all
     trash_service.restrore_all
@@ -27,13 +29,17 @@ class TrashController < ApplicationController
 
   delegate :trash_race, to: :trash_service
 
+  delegate :have_obj?, to: :trash_service
+
+  delegate :empty_bin, to: :trash_service
+
+  def empty_bin
+    clean_all if have_obj?
+  end
+
   def clean_all
     trash_service.destroy_items_in_trash
     redirect_to trash_path
-  end
-
-  def trash_present?
-    @cars.present? and @race.present?
   end
 
   private
