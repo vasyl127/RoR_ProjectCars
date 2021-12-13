@@ -5,6 +5,7 @@ class RacesService
   def create(race_params)
     race = Race.new race_params
     race.save
+    race
   end
 
   def update(race, race_params)

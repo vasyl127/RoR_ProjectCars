@@ -29,8 +29,6 @@ class TrashController < ApplicationController
 
   delegate :trash_race, to: :trash_service
 
-  delegate :have_obj?, to: :trash_service
-
   delegate :empty_bin, to: :trash_service
 
   def empty_bin
@@ -57,18 +55,18 @@ class TrashController < ApplicationController
   end
 
   def cars
-    @cars = car_filter.cars_deleted
+    @cars = car_filter.find_deleted
   end
 
   def races
-    @races = race_filter.races_deleted
+    @races = race_filter.find_deleted
   end
 
   def set_car
-    @car = car_filter.car_by_id(params[:id])
+    @car = car_filter.find_by_id(params[:id])
   end
 
   def set_race
-    @race = race_filter.race_by_id(params[:id])
+    @race = race_filter.find_by_id(params[:id])
   end
 end

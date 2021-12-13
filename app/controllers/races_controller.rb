@@ -14,17 +14,17 @@ class RacesController < ApplicationController
   def show; end
 
   def select_car
-    @race_car = race_filter.cars_not_in_race(@race)
+    @race_car = car_filter.cars_not_in_race(@race)
   end
 
   def add_race_car
-    race_filter.cars_in_race(@race) << @car
+    car_filter.cars_in_race(@race) << @car
     flash[:success] = "#{@car.name} was added to the race"
     redirect_to "/races/#{@race.id}"
   end
 
   def delete_race_car
-    race_filter.cars_in_race(@race).delete(@car)
+    car_filter.cars_in_race(@race).delete(@car)
     flash[:success] = "#{@car.name} was removed from the race"
     redirect_to "/races/#{@race.id}"
   end
@@ -41,10 +41,8 @@ class RacesController < ApplicationController
   end
 
   def create
-    # if races_service.create(race_params)
-    # dont work errors messages, need fix
-    @race = Race.new race_params
-    if @race.save
+    @race = races_service.create(race_params)
+    if @race.persisted?
       redirect_to races_path
       flash[:success] = 'Race created!'
     else
@@ -90,18 +88,18 @@ class RacesController < ApplicationController
   end
 
   def set_cars
-    @cars = car_filter.cars_all
+    @cars = car_filter.find_actice
   end
 
   def set_car
-    @car = car_filter.car_by_id(params[:id] || params[:car_id])
+    @car = car_filter.find_by_id(params[:id] || params[:car_id])
   end
 
   def set_races
-    @races = race_filter.races_all
+    @races = race_filter.find_actice
   end
 
   def set_race
-    @race = race_filter.race_by_id(params[:id] || params[:race_id])
+    @race = race_filter.find_by_id(params[:id] || params[:race_id])
   end
 end

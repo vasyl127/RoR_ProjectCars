@@ -1,6 +1,7 @@
 require_relative 'services/filter/filter'
 require_relative 'services/cars_service'
-require_relative 'trash_controller'
+require_relative 'services/trash_service'
+
 
 class CarsController < ApplicationController
   before_action :set_cars, only: %i[index]
@@ -51,19 +52,15 @@ class CarsController < ApplicationController
     cars_service ||= CarsService.new
   end
 
-  def car_filter
-    car_filter ||= CarFilter.new
-  end
-
   def trash
-    trash ||= TrashController.new
+    trash ||= TrashService.new
   end
 
   def set_cars
-    @cars = car_filter.find_actice
+    @cars = cars_service.car_filter.find_actice
   end
 
   def set_car
-    @car = car_filter.find_by_id(params[:id])
+    @car = cars_service.car_filter.find_by_id(params[:id])
   end
 end
