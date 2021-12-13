@@ -15,7 +15,7 @@ class RacesService
 
   def add_to_race(car, race)
     race_filter.cars_in_race(race) << car
-  end 
+  end
 
   def race_logic
     race_logic ||= RaceLogic.new
@@ -42,5 +42,4 @@ class RacesService
   def race_filter
     race_filter ||= RaceFilter.new
   end
-
 end

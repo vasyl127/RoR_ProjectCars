@@ -3,7 +3,7 @@ require_relative '../../../models/race'
 
 class Filter
   attr_reader :scope
-   
+
   def initialize(scope)
     @scope = scope
   end

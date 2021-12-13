@@ -7,7 +7,7 @@ class TrashController < ApplicationController
   before_action :set_race, only: %i[restore_race trash_race]
 
   def index
-  @trash_service = trash_service
+    @trash_service = trash_service
   end
 
   def restore_all

@@ -2,7 +2,6 @@ require_relative 'services/filter/filter'
 require_relative 'services/cars_service'
 require_relative 'services/trash_service'
 
-
 class CarsController < ApplicationController
   before_action :set_cars, only: %i[index]
   before_action :set_car, only: %i[destroy edit update show create]

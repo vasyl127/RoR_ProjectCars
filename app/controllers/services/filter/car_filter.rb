@@ -3,7 +3,7 @@ require_relative 'filter'
 class CarFilter < Filter
   def initialize
     super(Car)
-  end   
+  end
 
   def cars_in_race(race)
     Car.joins(:race_cars).where('race_cars.race_id = ?', race.id)
