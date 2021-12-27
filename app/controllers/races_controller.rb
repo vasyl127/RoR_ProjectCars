@@ -18,13 +18,13 @@ class RacesController < ApplicationController
   end
 
   def add_race_car
-    car_filter.cars_in_race(@race) << @car
+    races_service.add_to_race(@car, @race)
     flash[:success] = "#{@car.name} was added to the race"
     redirect_to "/races/#{@race.id}"
   end
 
   def delete_race_car
-    car_filter.cars_in_race(@race).delete(@car)
+    races_service.remove_from_race(@car, @race)
     flash[:success] = "#{@car.name} was removed from the race"
     redirect_to "/races/#{@race.id}"
   end
@@ -36,7 +36,7 @@ class RacesController < ApplicationController
   def edit; end
 
   def start_race
-    @cars_list = races_service.start_race(race_filter.cars_in_race(@race), @race).sort_by(&:odo).reverse
+    @cars_list = races_service.start_race(car_filter.cars_in_race(@race), @race).sort_by(&:odo).reverse
     @race_conf = races_service.race_conf
   end
 

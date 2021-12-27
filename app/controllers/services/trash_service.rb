@@ -14,16 +14,16 @@ class TrashService
 
   def trash_car(car)
     # race_id
-    # car.races.delete_all
-    race_filter.races_for_car(car).delete_all
+    car.races.delete_all
+    # race_filter.races_for_car(car).delete_all
     car.update deleted: 1
     car.save
   end
 
   def trash_race(race)
     # race_id
-    # race.cars.delete_all
-    car_filter.cars_in_race(race).delete_all
+    race.cars.delete_all
+    # car_filter.cars_in_race(race).delete_all
     race.update deleted: 1
     race.save
   end

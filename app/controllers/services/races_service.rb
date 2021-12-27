@@ -14,11 +14,12 @@ class RacesService
   end
 
   def add_to_race(car, race)
-    race_filter.cars_in_race(race) << car
+    RaceCar.create(car_id: car.id, race_id: race.id)
   end
 
-  def race_logic
-    race_logic ||= RaceLogic.new
+  def remove_from_race(car, race)
+    race_car = RaceCar.where(car_id: car.id, race_id: race.id)
+    race_car.destroy(race_car.ids)
   end
 
   def start_race(cars, race)
@@ -41,5 +42,9 @@ class RacesService
 
   def race_filter
     race_filter ||= RaceFilter.new
+  end
+
+  def race_logic
+    race_logic ||= RaceLogic.new
   end
 end

@@ -10,6 +10,6 @@ class CarFilter < Filter
   end
 
   def cars_not_in_race(race)
-    Car.where.not(id: cars_in_race(race).ids)
+    Car.where.not(id: cars_in_race(race).ids).where(deleted: 0)
   end
 end
